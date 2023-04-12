@@ -179,7 +179,8 @@ Therefore, $\mu$ is not $\sigma$-additive.
 
 Let $\mu$ be a set function
 defined on $\mathcal{C} \subseteq \mathcal{P}(\Omega)$.
-Then- ➀ $\mu$ is said to
+Then
+- ➀ $\mu$ is said to
 be **continuous from below**
 at set $E \in \mathcal{C}$ if
 
