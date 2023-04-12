@@ -1,0 +1,641 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>1.2. Set Functions &#8212; Probability Theory</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/admonition.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"C": "\\mathbb{C}", "FF": "\\mathbb{F}", "N": "\\mathbb{N}", "Ns": "\\mathbb{N^\\ast}", "Q": "\\mathbb{Q}", "R": "\\mathbb{R}", "Span": ["\\mathop{\\mathrm{span}}"], "Z": "\\mathbb{Z}", "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "argmax": ["\\mathop{\\mathrm{arg \\, max}}"], "argmin": ["\\mathop{\\mathrm{arg \\, min}}"], "bmat": ["\\left[\\begin{array}"], "brk": ["\\left( #1 \\right)", 1], "col": ["\\mathop{\\mathrm{col}}"], "d": ["\\mathrm{d}"], "emat": ["\\end{array}\\right]"], "floor": ["\\lfloor#1\\rfloor", 1], "im": ["\\mathop{\\mathrm{im}}"], "ind": ["\\mathbb{1}"], "ker": ["\\mathop{\\mathrm{ker}}"], "lowint": ["\\underline{\\int}"], "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "odv": ["\\frac{\\mathrm{d} #1s}{\\mathrm{d} #2}", 2], "odvs": ["\\frac{\\mathrm{d}}{\\mathrm{d} #2} #1", 2], "row": ["\\mathop{\\mathrm{row}}"], "set": ["\\left\\{ #1 \\middle| #2 \\right\\}", 2], "upint": ["\\overline{\\int}"], "v": ["\\mathbf{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.3. Extension of Measures" href="Extension%20of%20Measures.html" />
+    <link rel="prev" title="1.1. Classes of Sets" href="Classes%20of%20Sets.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Probability Theory</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Main Contents
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   1. Measure Theory
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Classes%20of%20Sets.html">
+     1.1. Classes of Sets
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     1.2. Set Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Extension%20of%20Measures.html">
+     1.3. Extension of Measures
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Sets%20and%20Events/index.html">
+   2. Sets and Events
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Sets%20and%20Events/Probability%20Spaces.html">
+     2.1. Probability Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Sets%20and%20Events/Distributions.html">
+     2.2. Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/Isaac-Fate/probability-theory"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/Isaac-Fate/probability-theory/issues/new?title=Issue%20on%20page%20%2FMeasure Theory/Set Functions.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Measure Theory/Set Functions.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Set Functions</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="set-functions">
+<span id="index-0"></span><h1><span class="section-number">1.2. </span>Set Functions<a class="headerlink" href="#set-functions" title="Permalink to this headline">#</a></h1>
+<p>A <strong>set function</strong>
+is a function defined on collection of sets
+whose range is usually the union
+of non-negative real numbers
+and the positive infinity, <span class="math notranslate nohighlight">\(\R_{\geq 0} \cup \{\infty\}\)</span>.</p>
+<div class="proof definition admonition" id="def:5">
+<p class="admonition-title"><span class="caption-number">Definition 1.5 </span></p>
+<section class="definition-content" id="proof-content">
+<p id="index-1">A set function, <span class="math notranslate nohighlight">\(\mu\)</span>, defined
+on <span class="math notranslate nohighlight">\(\mathcal{C} \subseteq \mathcal{P}(\Omega)\)</span> is said to
+be <strong>additive</strong>
+or <strong>finitely additive</strong>
+if</p>
+<ul class="simple">
+<li><p>➀ <span class="math notranslate nohighlight">\(\mu(\emptyset) = 0\)</span>, and</p></li>
+<li><p>➁ <span class="math notranslate nohighlight">\(\mu \brk{ \biguplus_{i=1}^n A_i } = \sum_{i=1}^n \mu(A_i)\)</span>.</p></li>
+</ul>
+</section>
+</div><p>By the second condition in above definition,
+the natural class of sets to consider
+is the algebra since we
+would want that the class is closed under finite unions of sets.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The condition <span class="math notranslate nohighlight">\(\mu(\emptyset) = 0\)</span>
+is actually redundant in all cases except the one
+where <span class="math notranslate nohighlight">\(\mu(A) = \infty\)</span> for all <span class="math notranslate nohighlight">\(A \in \mathcal{C}\)</span>.
+To see this, suppose that <span class="math notranslate nohighlight">\(\mu(A) &lt; \infty\)</span>
+for some <span class="math notranslate nohighlight">\(A \in \mathcal{C}\)</span>.
+We have <span class="math notranslate nohighlight">\(A = A \uplus \emptyset\)</span>.
+It then follows from the second condition
+that <span class="math notranslate nohighlight">\(\mu(A) = \mu(A) + \mu(\emptyset)\)</span>,
+which further implies <span class="math notranslate nohighlight">\(\mu(\emptyset) = 0\)</span>
+since <span class="math notranslate nohighlight">\(\mu(A) &lt; \infty\)</span>.</p>
+</div>
+<p>If <span class="math notranslate nohighlight">\(A \subseteq B\)</span>,
+then it is natural to expect that <span class="math notranslate nohighlight">\(\mu(A) \leq \mu(B)\)</span>.
+It is indeed the case.
+But the proof is not completely trivial.
+We can always write <span class="math notranslate nohighlight">\(B = A \uplus (B \setminus A)\)</span>.
+Then, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\mu(B) = \mu(A) + \mu(B \setminus A)
+\geq\mu(A)
+\end{align*}\]</div>
+<p>Note that the above inequality holds
+no matter whether <span class="math notranslate nohighlight">\(\mu(B \setminus A)\)</span> is finite or not.</p>
+<div class="proof definition admonition" id="def:6">
+<p class="admonition-title"><span class="caption-number">Definition 1.6 </span></p>
+<section class="definition-content" id="proof-content">
+<p id="index-2">A set function, <span class="math notranslate nohighlight">\(\mu\)</span>,
+defined on <span class="math notranslate nohighlight">\(\mathcal{C} \subseteq \mathcal{P}(\Omega)\)</span>
+is said to be <strong><span class="math notranslate nohighlight">\(\sigma\)</span>-additive</strong>
+if</p>
+<ul class="simple">
+<li><p>➀ <span class="math notranslate nohighlight">\(\mu(\emptyset) = 0\)</span>, and</p></li>
+<li><p>➁ <span class="math notranslate nohighlight">\(\mu\brk{ \biguplus_{n=1}^\infty A_n } = \sum_{n=1}^\infty \mu(A_n)\)</span></p></li>
+</ul>
+</section>
+</div><div class="proof example admonition" id="eg:2">
+<p class="admonition-title"><span class="caption-number">Example 1.2 </span></p>
+<section class="example-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Omega = (0, 1)\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\mathcal{C} = \set{(a, b]}{0 \leq a &lt; b &lt; 1}\end{align*}\]</div>
+<p>Consider the set function <span class="math notranslate nohighlight">\(\mu\)</span> on <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}\mu(a, b] = \begin{cases}
+\infty,
+&amp;a = 0 \\
+b - a,
+&amp;a &gt; 0
+\end{cases}\end{align*}\end{split}\]</div>
+<p>We claim that <span class="math notranslate nohighlight">\(\mu\)</span> is additive on <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>.
+Suppose that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}(a, b]
+= \biguplus_{i=1}^n (a_i, b_i]\end{align*}\]</div>
+<p>There are two cases.</p>
+<p>(Case 1: <span class="math notranslate nohighlight">\(a = 0\)</span>) If <span class="math notranslate nohighlight">\(a = 0\)</span>, then <span class="math notranslate nohighlight">\(\mu (a, b] = \infty\)</span>.
+And there exists <span class="math notranslate nohighlight">\(i\)</span> such that <span class="math notranslate nohighlight">\(a_i = 0\)</span>,
+which implies <span class="math notranslate nohighlight">\(\mu(a_i, b_i] = \infty\)</span>.
+In this case, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\infty = \mu(a, b]
+= \sum_{i=1}^n \mu(a_i, b_i] = \infty\end{align*}\]</div>
+<p>(Case 2: <span class="math notranslate nohighlight">\(a &gt; 0\)</span>) Without loss of generality,
+we may assume <span class="math notranslate nohighlight">\(a_i &lt; a_{i+1}\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>.
+Then it is clear that <span class="math notranslate nohighlight">\(a_1 = a\)</span>, <span class="math notranslate nohighlight">\(b_n = b\)</span>, and</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}
+b_i = a_{i+1}\quad\forall i = 1, \ldots, n-1
+\end{align*}\]</div>
+<p>It follows that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\sum_{i=1}^n \mu(a_i, b_i]
+= \sum_{i=1}^n b_i - a_1
+= b - a
+= \mu(a, b]\end{align*}\]</div>
+<p>Therefore, we conclude that <span class="math notranslate nohighlight">\(\mu\)</span> is indeed additive.
+However, <span class="math notranslate nohighlight">\(\mu\)</span> is not <span class="math notranslate nohighlight">\(\sigma\)</span>-additive.
+To see this, we note that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}(0, \frac{1}{2}]
+= \biguplus_{i = 2}^\infty( \frac{1}{i+1}, \frac{1}{i}]\end{align*}\]</div>
+<p>We have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\sum_{i=2}^\infty\mu(\frac{1}{i+1}, \frac{1}{i}]
+= \sum_{i=2}^\infty\brk{ -\frac{1}{i+1} + \frac{1}{i}}
+= \lim_{n \to \infty}\brk{ \frac{1}{2} - \frac{1}{n+1} }
+= \frac{1}{2}\end{align*}\]</div>
+<p>whereas</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\mu(0, \frac{1}{2}] = \infty\end{align*}\]</div>
+<p>Therefore, <span class="math notranslate nohighlight">\(\mu\)</span> is not <span class="math notranslate nohighlight">\(\sigma\)</span>-additive.</p>
+</section>
+</div><div class="proof definition admonition" id="def:7">
+<p class="admonition-title"><span class="caption-number">Definition 1.7 </span></p>
+<section class="definition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mu\)</span> be a set function
+defined on <span class="math notranslate nohighlight">\(\mathcal{C} \subseteq \mathcal{P}(\Omega)\)</span>.
+Then</p>
+<ul class="simple">
+<li><p>➀ ```{index} continuity from below</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$\mu$ is said to
+be **continuous from below**
+at set $E \in \mathcal{C}$ if
+
+```{math}
+\begin{align*}
+E_n \in\mathcal{C}, \; E_n \uparrow E
+\implies\mu(E_n) \uparrow\mu(E)
+\end{align*}
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>➁ ```{index} continuity from above</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$\mu$ is said to
+be **continuous from above**
+at set $E \in \mathcal{C}$ if
+
+```{math}
+\begin{align*}
+E_n \in\mathcal{C}, \; E_n \downarrow E
+\quad\text{and}\quad\exists n_0 \in\N^\ast, \;\mu(E_{n_{0}}) &lt; \infty\implies\mu(E_n) \downarrow\mu(E)
+\end{align*}
+</pre></div>
+</div>
+</section>
+</div><p>The symbol <span class="math notranslate nohighlight">\(E_n \uparrow E\)</span> means that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}
+E_n \subseteq E_{n+1}\quad\forall n \in\N^\ast\quad\text{and}\quad\bigcup_{n = 1}^\infty E_n = E
+\end{align*}\]</div>
+<p>And by writing <span class="math notranslate nohighlight">\(\mu(E_n) \uparrow \mu(E)\)</span>,
+we mean that</p>
+<ul class="simple">
+<li><p>➀ <span class="math notranslate nohighlight">\(\{\mu(E_n)\}\)</span> is an increasing sequence
+(of extended real numbers), and</p></li>
+<li><p>➁ <span class="math notranslate nohighlight">\(\lim_{n \to \infty} \mu(E_n) = \mu(E)\)</span>.</p></li>
+</ul>
+<p>In fact, in the above definition, we only need to assume
+the limit of <span class="math notranslate nohighlight">\(\mu(E_n)\)</span> is <span class="math notranslate nohighlight">\(\mu(E)\)</span>
+since we have already noticed that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}
+A \subseteq B  \implies\mu(A) \leq\mu(B)
+\end{align*}\]</div>
+<p>Now, we pay attention to the condition in the second statement
+of the above definition, i.e.,
+the definition of the continuity from above.
+Note that comparing to the continuity from below,
+we impose an additional requirement that <span class="math notranslate nohighlight">\(\mu(E_{n_0})\)</span> is finite
+for some index <span class="math notranslate nohighlight">\(n_0\)</span>.
+The reason why we do this is explained through the following example.</p>
+<div class="proof example admonition" id="eg:3">
+<p class="admonition-title"><span class="caption-number">Example 1.3 </span></p>
+<section class="example-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Omega = \R\)</span> and <span class="math notranslate nohighlight">\(E_n = [n, \infty)\)</span>.
+We would want the length of <span class="math notranslate nohighlight">\(E_n\)</span>, <span class="math notranslate nohighlight">\(\lambda(E_n)\)</span>,
+to be infinity.
+Actually, <span class="math notranslate nohighlight">\(\lambda\)</span> is a measure, called Lebesgue measure,
+on the Borel <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra of the real line,
+which is a generalization of the concept of length.</p>
+<p>Note that <span class="math notranslate nohighlight">\(E_n \downarrow \emptyset\)</span>.
+We have <span class="math notranslate nohighlight">\(\lambda(E_n) = \infty\)</span> whereas <span class="math notranslate nohighlight">\(\lambda(\emptyset) = 0\)</span>.
+In this case, <span class="math notranslate nohighlight">\(\lambda(E_n)\)</span> does not tend to <span class="math notranslate nohighlight">\(\lambda(\emptyset)\)</span>
+as <span class="math notranslate nohighlight">\(n \to \infty\)</span>.
+If we do not assume <span class="math notranslate nohighlight">\(\lambda(E_n)\)</span> is finite for some <span class="math notranslate nohighlight">\(n = n_0\)</span>,
+then we cannot say <span class="math notranslate nohighlight">\(\lambda\)</span> is continuous from above at <span class="math notranslate nohighlight">\(\emptyset\)</span>
+in this case.
+However, we really want that the measure to be continuous from above
+at all sets.
+Therefore, it is necessary to impose an additional condition
+as in <a class="reference internal" href="#def:7">Definition 1.7</a>.</p>
+</section>
+</div></section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Isaac-Fate/probability-theory",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Measure Theory"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Classes%20of%20Sets.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">1.1. </span>Classes of Sets</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Extension%20of%20Measures.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1.3. </span>Extension of Measures</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Isaac FEI<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

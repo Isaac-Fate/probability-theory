@@ -1,0 +1,715 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>1.1. Classes of Sets &#8212; Probability Theory</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/admonition.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"C": "\\mathbb{C}", "FF": "\\mathbb{F}", "N": "\\mathbb{N}", "Ns": "\\mathbb{N^\\ast}", "Q": "\\mathbb{Q}", "R": "\\mathbb{R}", "Span": ["\\mathop{\\mathrm{span}}"], "Z": "\\mathbb{Z}", "abs": ["\\left\\lvert #1 \\right\\rvert", 1], "argmax": ["\\mathop{\\mathrm{arg \\, max}}"], "argmin": ["\\mathop{\\mathrm{arg \\, min}}"], "bmat": ["\\left[\\begin{array}"], "brk": ["\\left( #1 \\right)", 1], "col": ["\\mathop{\\mathrm{col}}"], "d": ["\\mathrm{d}"], "emat": ["\\end{array}\\right]"], "floor": ["\\lfloor#1\\rfloor", 1], "im": ["\\mathop{\\mathrm{im}}"], "ind": ["\\mathbb{1}"], "ker": ["\\mathop{\\mathrm{ker}}"], "lowint": ["\\underline{\\int}"], "norm": ["\\left\\lVert #1 \\right\\rVert", 1], "odv": ["\\frac{\\mathrm{d} #1s}{\\mathrm{d} #2}", 2], "odvs": ["\\frac{\\mathrm{d}}{\\mathrm{d} #2} #1", 2], "row": ["\\mathop{\\mathrm{row}}"], "set": ["\\left\\{ #1 \\middle| #2 \\right\\}", 2], "upint": ["\\overline{\\int}"], "v": ["\\mathbf{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.2. Set Functions" href="Set%20Functions.html" />
+    <link rel="prev" title="1. Measure Theory" href="index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Probability Theory</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Main Contents
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index.html">
+   1. Measure Theory
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     1.1. Classes of Sets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Set%20Functions.html">
+     1.2. Set Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Extension%20of%20Measures.html">
+     1.3. Extension of Measures
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Sets%20and%20Events/index.html">
+   2. Sets and Events
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Sets%20and%20Events/Probability%20Spaces.html">
+     2.1. Probability Spaces
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Sets%20and%20Events/Distributions.html">
+     2.2. Distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../genindex.html">
+   Index
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/Isaac-Fate/probability-theory"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/Isaac-Fate/probability-theory/issues/new?title=Issue%20on%20page%20%2FMeasure Theory/Classes of Sets.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Measure Theory/Classes of Sets.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Classes of Sets</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="classes-of-sets">
+<h1><span class="section-number">1.1. </span>Classes of Sets<a class="headerlink" href="#classes-of-sets" title="Permalink to this headline">#</a></h1>
+<div class="proof definition admonition" id="def:1">
+<p class="admonition-title"><span class="caption-number">Definition 1.1 </span></p>
+<section class="definition-content" id="proof-content">
+<p id="index-0">A collection of subsets of <span class="math notranslate nohighlight">\(\Omega\)</span>, <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>,
+is a <strong>semi-algebra</strong>
+if it satisfies the following properties:</p>
+<ul class="simple">
+<li><p>➀ <span class="math notranslate nohighlight">\(\Omega \in \mathcal{S}\)</span></p></li>
+<li><p>➁ <span class="math notranslate nohighlight">\(A, B \in \mathcal{S} \implies A \cap B \in \mathcal{S}\)</span></p></li>
+<li><p>➂ The complement of every set in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> can be
+written as a finite disjoint union
+of sets in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>.
+Formally, <span class="math notranslate nohighlight">\(\forall A \in \mathcal{S}, \; \exists E_1, \ldots, E_n \in \mathcal{S}\)</span>
+such that <span class="math notranslate nohighlight">\(A^\complement = \biguplus_{i=1}^n E_i\)</span></p></li>
+</ul>
+</section>
+</div><div class="proof example admonition" id="eg:1">
+<p class="admonition-title"><span class="caption-number">Example 1.1 </span></p>
+<section class="example-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Omega = \R\)</span>.
+Suppose <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is a collection of subsets in <span class="math notranslate nohighlight">\(\R\)</span>
+consisting of intervals of the following forms:</p>
+<ul class="simple">
+<li><p>➀ <span class="math notranslate nohighlight">\((a, b]\)</span></p></li>
+<li><p>➁ <span class="math notranslate nohighlight">\((-\infty, b]\)</span></p></li>
+<li><p>➂ <span class="math notranslate nohighlight">\((a, \infty)\)</span></p></li>
+<li><p>➃ <span class="math notranslate nohighlight">\((-\infty, \infty) = \R\)</span></p></li>
+</ul>
+<p>One may check that <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is indeed a semi-algebra by definition.
+And it is by studying this type of collection of sets that
+the definition of semi-algebra arises.</p>
+</section>
+</div><div class="proof definition admonition" id="def:2">
+<p class="admonition-title"><span class="caption-number">Definition 1.2 </span></p>
+<section class="definition-content" id="proof-content">
+<p id="index-1">A collection of subsets of <span class="math notranslate nohighlight">\(\Omega\)</span>, <span class="math notranslate nohighlight">\(\mathcal{A}\)</span>,
+is called an <strong>algebra</strong> if</p>
+<ul class="simple">
+<li><p>➀ <span class="math notranslate nohighlight">\(\Omega \in \mathcal{A}\)</span></p></li>
+<li><p>➁ <span class="math notranslate nohighlight">\(A, B \in \mathcal{A} \implies A \cap B \in \mathcal{A}\)</span></p></li>
+<li><p>➂ <span class="math notranslate nohighlight">\(A \in \mathcal{A} \implies A^\complement \in \mathcal{A}\)</span></p></li>
+</ul>
+</section>
+</div><div class="proof proposition admonition" id="pro:1">
+<p class="admonition-title"><span class="caption-number">Proposition 1.1 </span></p>
+<section class="proposition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{\mathcal{A}_\alpha\}_{\alpha \in \Lambda}\)</span>
+be a collection of algebras in <span class="math notranslate nohighlight">\(\Omega\)</span>
+where <span class="math notranslate nohighlight">\(\Lambda\)</span> is any index set,
+then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\bigcap_{\alpha \in \Lambda}\mathcal{A}_{\alpha}\end{align*}\]</div>
+<p>is also an algebra.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. TODO</p>
+</div>
+<div class="proof definition admonition" id="def:3">
+<p class="admonition-title"><span class="caption-number">Definition 1.3 </span></p>
+<section class="definition-content" id="proof-content">
+<p id="index-2">A collection of subsets of <span class="math notranslate nohighlight">\(\Omega\)</span>, <span class="math notranslate nohighlight">\(\mathcal{F}\)</span>,
+is called a <strong><span class="math notranslate nohighlight">\(\sigma\)</span>-algebra</strong> if</p>
+<ul class="simple">
+<li><p>➀ <span class="math notranslate nohighlight">\(\Omega \in \mathcal{F}\)</span></p></li>
+<li><p>➁ <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> is closed under countable intersections,
+i.e,. <span class="math notranslate nohighlight">\(A_n \in \mathcal{F} \; \forall n \in \N^\ast \implies \bigcap_{n=1}^\infty A_n \in \mathcal{F}\)</span></p></li>
+<li><p>➂ <span class="math notranslate nohighlight">\(A \in \mathcal{F} \implies A^\complement \in \mathcal{F}\)</span></p></li>
+</ul>
+</section>
+</div><p>Of course, a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra is also closed under finite intersections
+(and unions)
+since we can always write</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\bigcap_{n=1}^m A_n
+= \bigcap_{n=1}^m A_n \cap\bigcap_{n=m+1}^\infty\Omega
+= \bigcap_{n=1}^\infty A_n
+\quad\text{where $A_n = \Omega$ for $n \geq m+1$}\end{align*}\]</div>
+<p>Therefore, the <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra is of course an algebra.</p>
+<p>Analogous to <a class="reference internal" href="#pro:1">Proposition 1.1</a>, any intersections of <span class="math notranslate nohighlight">\(\sigma\)</span>-algebras
+is also itself a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra.</p>
+<div class="proof proposition admonition" id="pro:2">
+<p class="admonition-title"><span class="caption-number">Proposition 1.2 </span></p>
+<section class="proposition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\{\mathcal{F}_\alpha\}_{\alpha \in \Lambda}\)</span>
+be a collection of <span class="math notranslate nohighlight">\(\sigma\)</span>-algebras in <span class="math notranslate nohighlight">\(\Omega\)</span>
+where <span class="math notranslate nohighlight">\(\Lambda\)</span> is any index set,
+then</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\bigcap_{\alpha \in \Lambda}\mathcal{F}_{\alpha}\end{align*}\]</div>
+<p>is also a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra.</p>
+</section>
+</div><p>Having proved <a class="reference internal" href="#pro:1">Proposition 1.1</a> and <a class="reference internal" href="#pro:2">Proposition 1.2</a>,
+we may introduce the algebra and <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra
+generated by a class of subsets in <span class="math notranslate nohighlight">\(\Omega\)</span>.</p>
+<div class="proof definition admonition" id="def:4">
+<p class="admonition-title"><span class="caption-number">Definition 1.4 </span></p>
+<section class="definition-content" id="proof-content">
+<p id="index-3">Let <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> be a class of subsets in <span class="math notranslate nohighlight">\(\Omega\)</span>.
+The <strong>algebra generated by <span class="math notranslate nohighlight">\(\mathcal{C}\)</span></strong>,
+is defined by</p>
+<div class="math notranslate nohighlight" id="index-4">
+\[\begin{align*}\mathcal{A}(\mathcal{C})
+:= \bigcap_{
+\text{$\mathcal{A}$ is an algebra, }\mathcal{A}
+\supseteq \mathcal{C}
+}\mathcal{A}\end{align*}\]</div>
+<p>That is, it is the intersection of all algebras
+containing <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>.
+Similarly, the <strong><span class="math notranslate nohighlight">\(\sigma\)</span>-algebra generated by <span class="math notranslate nohighlight">\(\mathcal{C}\)</span></strong>
+is defined by</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\sigma(\mathcal{C})
+:= \bigcap_{
+\text{$\mathcal{F}$ is a $\sigma$-algebra, }\mathcal{F}
+\supseteq \mathcal{C}
+}\mathcal{F}\end{align*}\]</div>
+</section>
+</div><p>Note that the set</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\set{\mathcal{A} \subset \mathcal{P}(\Omega)}{\text{$\mathcal{A}$ is an algebra, }\mathcal{A} \supseteq \mathcal{C}}\end{align*}\]</div>
+<p>is clearly nonempty since the power set, <span class="math notranslate nohighlight">\(\mathcal{P}(\Omega)\)</span>,
+itself is one of its element.
+And then by <a class="reference internal" href="#pro:1">Proposition 1.1</a>, <span class="math notranslate nohighlight">\(\mathcal{A}(\mathcal{C})\)</span>
+is indeed well-defined, and so is <span class="math notranslate nohighlight">\(\sigma(\mathcal{C})\)</span>.</p>
+<p>One important property for <span class="math notranslate nohighlight">\(\mathcal{A}(\mathcal{C})\)</span>(resp. <span class="math notranslate nohighlight">\(\sigma(\mathcal{C})\)</span>) is that
+it is the <em>smallest</em> algebra (resp. <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra)
+containing <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>, as stated in the following proposition.</p>
+<div class="proof proposition admonition" id="pro:3">
+<p class="admonition-title"><span class="caption-number">Proposition 1.3 </span></p>
+<section class="proposition-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{C} \subseteq \mathcal{P}(\Omega)\)</span>.
+We have the following:</p>
+<ul class="simple">
+<li><p>➀ If <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> is an algebra containing <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>,
+then <span class="math notranslate nohighlight">\(\mathcal{A} \supseteq \mathcal{A}(\mathcal{C})\)</span>.</p></li>
+<li><p>➁ If <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> is a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra containing <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>,
+then <span class="math notranslate nohighlight">\(\mathcal{F} \supseteq \sigma(\mathcal{C})\)</span>.</p></li>
+</ul>
+</section>
+</div><p>As we see in <a class="reference internal" href="#eg:1">Example 1.1</a>,
+it is easy to describe the elements in a semi-algebra
+directly in terms of subsets of <span class="math notranslate nohighlight">\(\Omega\)</span>.
+However, it is difficult in general to describe
+the elements in an algebra,
+and it is even more difficult to do the same
+for the <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra.</p>
+<p>It is because there is no explicit form of
+describing a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra in terms of subsets in <span class="math notranslate nohighlight">\(\Omega\)</span>
+that makes the extension of a measure (or any properties) from
+the semi-algebra to <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra extremely difficult.
+As we shall see in many proofs,
+we will exploit the property of a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra
+in an <em>inductive</em> way rather than a <em>constructive</em> one.</p>
+<p>Fortunately, we do have an explicit form for the algebra generated
+by a semi-algebra <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>, <span class="math notranslate nohighlight">\(\mathcal{A}(\mathcal{S})\)</span>,
+in terms of sets in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>.
+It turns out that it is simply the collection
+of all finite disjoint unions of sets in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>.</p>
+<div class="proof theorem admonition" id="thm:2">
+<p class="admonition-title"><span class="caption-number">Theorem 1.1 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> be a semi-algebra on <span class="math notranslate nohighlight">\(\Omega\)</span>.
+Then</p>
+<div class="math notranslate nohighlight" id="equation-eq-1">
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-eq-1" title="Permalink to this equation">#</a></span>\[\begin{align}
+A \in\mathcal{A}(\mathcal{S})
+\iff\exists E_1, \ldots, E_n \in\mathcal{S}, \;
+A = \biguplus_{i=1}^n E_i
+\end{align}\]</div>
+</section>
+</div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that the integer <span class="math notranslate nohighlight">\(n\)</span> in <a class="reference internal" href="#equation-eq-1">(1.2)</a> is not fixed.
+That is the choice of <span class="math notranslate nohighlight">\(n\)</span> may vary for different set <span class="math notranslate nohighlight">\(A\)</span>.</p>
+</div>
+<div class="proof admonition" id="proof">
+<p>Proof. (Proof of <span class="math notranslate nohighlight">\(\impliedby\)</span>) The reverse direction of <a class="reference internal" href="#equation-eq-1">(1.2)</a>
+is easy to prove.
+Suppose <span class="math notranslate nohighlight">\(A = \biguplus_{i=1}^n E_i\)</span> where each <span class="math notranslate nohighlight">\(E_i \in \mathcal{S}\)</span>.
+Then clearly <span class="math notranslate nohighlight">\(A \in \mathcal{A}(\mathcal{S})\)</span>
+since the algebra is closed under finite unions.</p>
+<p>(Proof of <span class="math notranslate nohighlight">\(\implies\)</span>)
+The proof of the forward direction is more interesting.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that given <span class="math notranslate nohighlight">\(A \in \mathcal{A}(\mathcal{S})\)</span>,
+it is tempting and yet difficult
+to find a representation of <span class="math notranslate nohighlight">\(A\)</span>
+as the right-hand side of <a class="reference internal" href="#equation-eq-1">(1.2)</a>.
+Hence, we shall prove this in an indirect way.
+Instead of finding a specific representation of <span class="math notranslate nohighlight">\(A\)</span>,
+we shall look at all representations described by <a class="reference internal" href="#equation-eq-1">(1.2)</a>.
+That is, we consider the collection, say <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>,
+of all finite disjoint unions of sets in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>.
+And then we show
+that <span class="math notranslate nohighlight">\(\mathcal{A}(\mathcal{S}) \subseteq \mathcal{C}\)</span>.</p>
+</div>
+<p>Define</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\mathcal{C}
+= \set{E \subseteq \Omega}{
+\exists E_1, \ldots, E_n \in \mathcal{S}, \;
+E = \biguplus_{i=1}^n E_i
+}\end{align*}\]</div>
+<p>The goal is to show that this collection <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>
+is actually an algebra containing <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>.</p>
+<p>It is clear that <span class="math notranslate nohighlight">\(\mathcal{C} \supseteq \mathcal{S}\)</span>
+by the definition of <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>.
+What remains to show is that <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>
+is an algebra.
+We need to check whether it satisfies
+each of the three properties one after another.</p>
+<p>First, note that <span class="math notranslate nohighlight">\(\Omega \in \mathcal{C}\)</span>
+since <span class="math notranslate nohighlight">\(\Omega \in \mathcal{S}\)</span>
+and we have seen that <span class="math notranslate nohighlight">\(\mathcal{C} \supseteq \mathcal{S}\)</span>.</p>
+<p>Now, we show <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> is closed under intersections.
+Let <span class="math notranslate nohighlight">\(E, F \in \mathcal{C}\)</span>.
+By definition, <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(F\)</span> can be written as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}
+E = \biguplus_{i=1}^n E_i
+\quad\text{and}\quad
+F = \biguplus_{j=1}^m F_j
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(E_i, F_j \in \mathcal{S}\)</span>.
+It then follows that</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}
+E \cap F
+= \biguplus_{i=1}^n \brk{
+E_i \cap \biguplus_{j=1}^m F_j
+}
+= \biguplus_{i=1}^n \biguplus_{j=1}^m \brk{E_i \cap F_j}\end{align*}\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(E_i \cap F_j \in \mathcal{S}\)</span>.
+Hence, we have <span class="math notranslate nohighlight">\(E \cap F \in \mathcal{C}\)</span>
+since the above equation says <span class="math notranslate nohighlight">\(E \cap F\)</span>
+is a finite disjoint union of sets, <span class="math notranslate nohighlight">\((E_i \cap F_j)\)</span>’s,
+in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>.</p>
+<p>We also need to show <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> is closed under complements.
+Let <span class="math notranslate nohighlight">\(E \in \mathcal{C}\)</span>.
+The set <span class="math notranslate nohighlight">\(E\)</span> can be written as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}
+E = \biguplus_{i=1}^n E_i
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(E_i \in \mathcal{S}\)</span>.
+Then, the complement of <span class="math notranslate nohighlight">\(E\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}
+E^\complement = \bigcap_{i=1}^n E^\complement_i
+\end{align*}\]</div>
+<p>By the property of semi-algebra,
+each <span class="math notranslate nohighlight">\(E^\complement_i\)</span> can be written as</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}
+E^\complement_i = \biguplus_{j=1}^{m_i} F_{i,j}\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(F_{i,j} \in \mathcal{S}\)</span>.
+Therefore, <span class="math notranslate nohighlight">\(E^\complement_i \in \mathcal{C}\)</span>
+by the definition of <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>.
+And then <span class="math notranslate nohighlight">\(E^\complement \in \mathcal{C}\)</span>
+since we have already shown
+that <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> is closed under finite intersections.</p>
+<p>In summary, we have proved so far that <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>
+is indeed an algebra containing <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>.
+It then follows that <span class="math notranslate nohighlight">\(\mathcal{A}(\mathcal{S}) \subseteq \mathcal{C}\)</span>
+since <span class="math notranslate nohighlight">\(\mathcal{A}(\mathcal{S})\)</span>
+is the smallest algebra containing <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>.
+Therefore, for each <span class="math notranslate nohighlight">\(A \in \mathcal{A}(\mathcal{S})\)</span>, <span class="math notranslate nohighlight">\(A\)</span>
+can always be written as a finite disjoint
+union of sets in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>
+by the definition of <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>.</p>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Isaac-Fate/probability-theory",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Measure Theory"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">1. </span>Measure Theory</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Set%20Functions.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1.2. </span>Set Functions</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Isaac FEI<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
