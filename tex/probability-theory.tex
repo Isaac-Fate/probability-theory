@@ -1,0 +1,612 @@
+\documentclass[thmcnt=section, 12pt, color=purple]{my-elegantbook}
+
+% index page
+\usepackage{imakeidx}
+\makeindex[columns=2, intoc, options=-s index_style.ist]
+
+% title and author
+\title{Probability Theory}
+\author{Isaac FEI}
+
+% reference file
+\addbibresource{Probability Theory.bib} 
+
+% image of the book cover
+\cover{cover}
+
+\begin{document}
+
+% Print title and cover page
+\maketitle
+
+%--------
+% preface
+%--------
+
+\frontmatter
+\section*{Preface}
+
+Probability theory is a fundamental branch of mathematics 
+with applications in numerous fields, 
+including statistics, computer science, physics, and engineering. 
+While the subject has many practical applications, 
+it is also a beautiful and elegant area of mathematics in its own right. 
+This book is designed to offer readers a thorough 
+and rigorous understanding of the concepts 
+and principles that underlie probability theory.
+
+To that end, this book begins with a detailed treatment of measure theory, 
+which provides the mathematical framework for probability theory. 
+I mainly refer to \cite{taylorIntroductionMeasureIntegration1973}
+for this part.
+From there, the book explores the concepts of random variables
+and distribution functions, and their properties. 
+
+%------------------------------
+
+% Print table of contents
+\tableofcontents
+\mainmatter
+
+%-------------------------------
+% main document starts from here
+%-------------------------------
+
+%==============================
+
+\chapter{Measure Theory}
+
+%------------------------------
+
+\section{Classes of Sets}
+
+%------------------------------
+
+\begin{definition} \label{def:1}
+	A collection of subsets of $\Omega$, $\mathcal{S}$, 
+	is a \textbf{semi-algebra}\index{semi-algebra}
+	if it satisfies the following properties:
+	\begin{enumerate}
+		\item $\Omega \in \mathcal{S}$
+		\item $A, B \in \mathcal{S} \implies A \cap B \in \mathcal{S}$
+		\item The complement of every set in $\mathcal{S}$ can be 
+			written as a finite disjoint union 
+			of sets in $\mathcal{S}$. 
+			Formally, $\forall A \in \mathcal{S}, \; \exists E_1, \ldots, E_n \in \mathcal{S}$
+			such that $A^\complement = \biguplus_{i=1}^n E_i$
+	\end{enumerate}
+\end{definition}
+
+\begin{example} \label{eg:1}
+	Let $\Omega = \R$.
+	Suppose $\mathcal{S}$ is a collection of subsets in $\R$
+	consisting of intervals of the following forms:
+	\begin{enumerate}
+		\item $(a, b]$
+		\item $(-\infty, b]$
+		\item $(a, \infty)$
+		\item $(-\infty, \infty) = \R$
+	\end{enumerate}
+	One may check that $\mathcal{S}$ is indeed a semi-algebra by definition.
+	And it is by studying this type of collection of sets that
+	the definition of semi-algebra arises.
+\end{example}
+
+%------------------------------
+
+\begin{definition} \label{def:2}
+	A collection of subsets of $\Omega$, $\mathcal{A}$,
+	is called an \textbf{algebra}\index{algebra} if
+	\begin{enumerate}
+		\item $\Omega \in \mathcal{A}$
+		\item $A, B \in \mathcal{A} \implies A \cap B \in \mathcal{A}$
+		\item $A \in \mathcal{A} \implies A^\complement \in \mathcal{A}$
+	\end{enumerate}
+\end{definition}
+
+%------------------------------
+
+\begin{proposition} \label{pro:1}
+	Let $\{\mathcal{A}_\alpha\}_{\alpha \in \Lambda}$ 
+	be a collection of algebras in $\Omega$
+	where $\Lambda$ is any index set,
+	then 
+	\begin{align*}
+		\bigcap_{\alpha \in \Lambda} \mathcal{A}_{\alpha}
+	\end{align*}
+	is also an algebra.
+\end{proposition}
+
+\begin{proof}
+	% TODO
+\end{proof}
+
+%------------------------------
+
+\begin{definition} \label{def:3}
+	A collection of subsets of $\Omega$, $\mathcal{F}$,
+	is called a \textbf{$\sigma$-algebra}\index{$\sigma$-algebra} if
+	\begin{enumerate}
+		\item $\Omega \in \mathcal{F}$
+		\item $\mathcal{F}$ is closed under countable intersections, 
+			i.e,. $A_n \in \mathcal{F} \; \forall n \in \N^\ast \implies \bigcap_{n=1}^\infty A_n \in \mathcal{F}$
+		\item $A \in \mathcal{F} \implies A^\complement \in \mathcal{F}$
+	\end{enumerate}
+\end{definition}
+
+Of course, a $\sigma$-algebra is also closed under finite intersections 
+(and unions)
+since we can always write
+\begin{align*}
+	\bigcap_{n=1}^m A_n
+	= \bigcap_{n=1}^m A_n \cap \bigcap_{n=m+1}^\infty \Omega
+	= \bigcap_{n=1}^\infty A_n
+	\quad \text{where $A_n = \Omega$ for $n \geq m+1$}
+\end{align*}
+Therefore, the $\sigma$-algebra is of course an algebra.
+
+Analogous to Proposition~\ref{pro:1}, any intersections of $\sigma$-algebras
+is also itself a $\sigma$-algebra.
+
+\begin{proposition} \label{pro:2}
+	Let $\{\mathcal{F}_\alpha\}_{\alpha \in \Lambda}$ 
+	be a collection of $\sigma$-algebras in $\Omega$
+	where $\Lambda$ is any index set,
+	then 
+	\begin{align*}
+		\bigcap_{\alpha \in \Lambda} \mathcal{F}_{\alpha}
+	\end{align*}
+	is also a $\sigma$-algebra.
+\end{proposition}
+
+%------------------------------
+
+Having proved Proposition~\ref{pro:1} and Proposition~\ref{pro:2},
+we may introduce the algebra and $\sigma$-algebra
+generated by a class of subsets in $\Omega$.
+
+\begin{definition} \label{def:4}
+	Let $\mathcal{C}$ be a class of subsets in $\Omega$.
+	The \textbf{algebra generated by $\mathcal{C}$}\index{algebra generated by class of sets}, 
+	is defined by 
+	\begin{align*}
+		\mathcal{A}(\mathcal{C})
+		:= \bigcap_{
+			\text{$\mathcal{A}$ is an algebra, }\mathcal{A} 
+			\supseteq \mathcal{C}
+		} \mathcal{A} 
+	\end{align*}
+	That is, it is the intersection of all algebras 
+	containing $\mathcal{C}$.
+	Similarly, the \textbf{$\sigma$-algebra generated by $\mathcal{C}$}\index{$\sigma$-algebra generated by class of sets}
+	is defined by 
+	\begin{align*}
+		\sigma(\mathcal{C})
+		:= \bigcap_{
+			\text{$\mathcal{F}$ is a $\sigma$-algebra, }\mathcal{F} 
+			\supseteq \mathcal{C}
+		} \mathcal{F}
+	\end{align*}
+\end{definition}
+
+Note that the set
+\begin{align*}
+	\set{\mathcal{A} \subset \mathcal{P}(\Omega)}
+	{\text{$\mathcal{A}$ is an algebra, }\mathcal{A} \supseteq \mathcal{C}}
+\end{align*}
+is clearly nonempty since the power set, $\mathcal{P}(\Omega)$, 
+itself is one of its element.
+And then by Proposition~\ref{pro:1}, $\mathcal{A}(\mathcal{C})$
+is indeed well-defined, and so is $\sigma(\mathcal{C})$.
+
+One important property for $\mathcal{A}(\mathcal{C})$ 
+(resp. $\sigma(\mathcal{C})$) is that 
+it is the \textit{smallest} algebra (resp. $\sigma$-algebra) 
+containing $\mathcal{C}$, as stated in the following proposition.
+
+\begin{proposition} \label{pro:3}
+	Let $\mathcal{C} \subseteq \mathcal{P}(\Omega)$.
+	We have the following:
+	\begin{enumerate}
+		\item If $\mathcal{A}$ is an algebra containing $\mathcal{C}$,
+			then $\mathcal{A} \supseteq \mathcal{A}(\mathcal{C})$.
+		\item If $\mathcal{F}$ is a $\sigma$-algebra containing $\mathcal{C}$,
+			then $\mathcal{F} \supseteq \sigma(\mathcal{C})$.
+	\end{enumerate}
+\end{proposition}
+
+%------------------------------
+
+As we see in Example~\ref{eg:1},
+it is easy to describe the elements in a semi-algebra
+directly in terms of subsets of $\Omega$.
+However, it is difficult in general to describe 
+the elements in an algebra,
+and it is even more difficult to do the same 
+for the $\sigma$-algebra.
+
+It is because there is no explicit form of
+describing a $\sigma$-algebra in terms of subsets in $\Omega$
+that makes the extension of a measure (or any properties) from 
+the semi-algebra to $\sigma$-algebra extremely difficult.
+As we shall see in many proofs, 
+we will exploit the property of a $\sigma$-algebra
+in an \textit{inductive} way rather than a \textit{constructive} one.
+
+Fortunately, we do have an explicit form for the algebra generated
+by a semi-algebra $\mathcal{S}$, $\mathcal{A}(\mathcal{S})$,
+in terms of sets in $\mathcal{S}$.
+It turns out that it is simply the collection
+of all finite disjoint unions of sets in $\mathcal{S}$.
+
+\begin{theorem} \label{thm:2}
+	Let $\mathcal{S}$ be a semi-algebra on $\Omega$.
+	Then
+	\begin{align}
+		A \in \mathcal{A}(\mathcal{S})
+		\iff \exists E_1, \ldots, E_n \in \mathcal{S}, \;
+		A = \biguplus_{i=1}^n E_i
+		\label{eq:1}
+	\end{align}
+\end{theorem}
+
+\begin{note}
+	Note that the integer $n$ in \eqref{eq:1} is not fixed.
+	That is the choice of $n$ may vary for different set $A$.
+\end{note}
+
+\begin{proof}
+	(Proof of $\impliedby$) The reverse direction of \eqref{eq:1}
+	is easy to prove. 
+	Suppose $A = \biguplus_{i=1}^n E_i$ where each $E_i \in \mathcal{S}$.
+	Then clearly $A \in \mathcal{A}(\mathcal{S})$
+	since the algebra is closed under finite unions.
+
+	(Proof of $\implies$)
+	The proof of the forward direction is more interesting.
+	\begin{note}
+		Note that given $A \in \mathcal{A}(\mathcal{S})$,
+		it is tempting and yet difficult
+		to find a representation of $A$
+		as the right-hand side of \eqref{eq:1}.
+		Hence, we shall prove this in an indirect way.
+		Instead of finding a specific representation of $A$,
+		we shall look at all representations described by \eqref{eq:1}.
+		That is, we consider the collection, say $\mathcal{C}$, 
+		of all finite disjoint unions of sets in $\mathcal{S}$.
+		And then we show 
+		that $\mathcal{A}(\mathcal{S}) \subseteq \mathcal{C}$.
+	\end{note}
+	\noindent Define 
+	\begin{align*}
+		\mathcal{C}
+		= \set{E \subseteq \Omega}{
+			\exists E_1, \ldots, E_n \in \mathcal{S}, \;
+			E = \biguplus_{i=1}^n E_i
+		}
+	\end{align*}
+	The goal is to show that this collection $\mathcal{C}$
+	is actually an algebra containing $\mathcal{S}$.
+
+	It is clear that $\mathcal{C} \supseteq \mathcal{S}$
+	by the definition of $\mathcal{C}$.
+	What remains to show is that $\mathcal{C}$
+	is an algebra.
+	We need to check whether it satisfies
+	each of the three properties one after another.
+
+	First, note that $\Omega \in \mathcal{C}$
+	since $\Omega \in \mathcal{S}$ 
+	and we have seen that $\mathcal{C} \supseteq \mathcal{S}$.
+
+	Now, we show $\mathcal{C}$ is closed under intersections.
+	Let $E, F \in \mathcal{C}$.
+	By definition, $E$ and $F$ can be written as 
+	\begin{align*}
+		E = \biguplus_{i=1}^n E_i
+		\quad \text{and} \quad 
+		F = \biguplus_{j=1}^m F_j
+	\end{align*}
+	where $E_i, F_j \in \mathcal{S}$.
+	It then follows that 
+	\begin{align*}
+		E \cap F
+		= \biguplus_{i=1}^n \brk{
+			E_i \cap \biguplus_{j=1}^m F_j
+		}
+		= \biguplus_{i=1}^n \biguplus_{j=1}^m \brk{E_i \cap F_j}
+	\end{align*}
+	Note that $E_i \cap F_j \in \mathcal{S}$.
+	Hence, we have $E \cap F \in \mathcal{C}$
+	since the above equation says $E \cap F$
+	is a finite disjoint union of sets, $(E_i \cap F_j)$'s, 
+	in $\mathcal{S}$.
+
+	We also need to show $\mathcal{C}$ is closed under complements.
+	Let $E \in \mathcal{C}$.
+	The set $E$ can be written as 
+	\begin{align*}
+		E = \biguplus_{i=1}^n E_i
+	\end{align*}
+	where $E_i \in \mathcal{S}$.
+	Then, the complement of $E$,
+	\begin{align*}
+		E^\complement = \bigcap_{i=1}^n E^\complement_i
+	\end{align*}
+	By the property of semi-algebra,
+	each $E^\complement_i$ can be written as 
+	\begin{align*}
+		E^\complement_i = \biguplus_{j=1}^{m_i} F_{i,j}
+	\end{align*}
+	where $F_{i,j} \in \mathcal{S}$.
+	Therefore, $E^\complement_i \in \mathcal{C}$ 
+	by the definition of $\mathcal{C}$.
+	And then $E^\complement \in \mathcal{C}$
+	since we have already shown
+	that $\mathcal{C}$ is closed under finite intersections.
+
+	In summary, we have proved so far that $\mathcal{C}$
+	is indeed an algebra containing $\mathcal{S}$.
+	It then follows that $\mathcal{A}(\mathcal{S}) \subseteq \mathcal{C}$
+	since $\mathcal{A}(\mathcal{S})$
+	is the smallest algebra containing $\mathcal{S}$.
+	Therefore, for each $A \in \mathcal{A}(\mathcal{S})$, $A$
+	can always be written as a finite disjoint
+	union of sets in $\mathcal{S}$
+	by the definition of $\mathcal{C}$.
+\end{proof}
+
+%------------------------------
+
+
+\section{Set Functions}
+
+%------------------------------
+
+A \textbf{set function}\index{set function}
+is a function defined on collection of sets
+whose range is usually the union
+of non-negative real numbers 
+and the positive infinity, $\R_{\geq 0} \cup \{\infty\}$.
+
+\begin{definition} \label{def:5}
+	A set function, $\mu$, defined 
+	on $\mathcal{C} \subseteq \mathcal{P}(\Omega)$ is said to 
+	be \textbf{additive}
+	or \textbf{finitely additive}\index{additive set function}
+	if
+	\begin{enumerate}
+		\item $\mu(\emptyset) = 0$, and
+		\item $\mu \brk{ \biguplus_{i=1}^n A_i } = \sum_{i=1}^n \mu(A_i)$.
+	\end{enumerate}
+\end{definition}
+
+By the second condition in above definition, 
+the natural class of sets to consider
+is the algebra since we 
+would want that the class is closed under finite unions of sets. 
+
+\begin{note}
+	The condition $\mu(\emptyset) = 0$
+	is actually redundant in all cases except the one
+	where $\mu(A) = \infty$ for all $A \in \mathcal{C}$.
+	To see this, suppose that $\mu(A) < \infty$
+	for some $A \in \mathcal{C}$.
+	We have $A = A \uplus \emptyset$.
+	It then follows from the second condition
+	that $\mu(A) = \mu(A) + \mu(\emptyset)$,
+	which further implies $\mu(\emptyset) = 0$
+	since $\mu(A) < \infty$.
+\end{note}
+
+If $A \subseteq B$,
+then it is natural to expect that $\mu(A) \leq \mu(B)$.
+It is indeed the case.
+But the proof is not completely trivial.
+We can always write $B = A \uplus (B \setminus A)$.
+Then, we have 
+\begin{align*}
+	\mu(B) = \mu(A) + \mu(B \setminus A)
+	\geq \mu(A)
+\end{align*}
+Note that the above inequality holds
+no matter whether $\mu(B \setminus A)$ is finite or not.
+
+%------------------------------
+
+\begin{definition} \label{def:6}
+	A set function, $\mu$, 
+	defined on $\mathcal{C} \subseteq \mathcal{P}(\Omega)$
+	is said to be \textbf{$\sigma$-additive}\index{$\sigma$-additive set function}
+	if
+	\begin{enumerate}
+		\item $\mu(\emptyset) = 0$, and 
+		\item $\mu\brk{ \biguplus_{n=1}^\infty A_n } = \sum_{n=1}^\infty \mu(A_n)$
+	\end{enumerate}
+\end{definition}
+
+\begin{example} \label{eg:2}
+	Let $\Omega = (0, 1)$ and
+	\begin{align*}
+		\mathcal{C} = \set{(a, b]}{0 \leq a < b < 1}
+	\end{align*}
+	Consider the set function $\mu$ on $\mathcal{C}$ given by
+	\begin{align*}
+		\mu (a, b] = \begin{cases}
+			\infty,
+			&a = 0 \\
+			b - a,
+			&a > 0
+		\end{cases}
+	\end{align*}
+	
+	We claim that $\mu$ is additive on $\mathcal{C}$.
+	Suppose that
+	\begin{align*}
+		(a, b]
+		= \biguplus_{i=1}^n (a_i, b_i]
+	\end{align*}
+	There are two cases.
+
+	(Case 1: $a = 0$) If $a = 0$, then $\mu (a, b] = \infty$.
+	And there exists $i$ such that $a_i = 0$,
+	which implies $\mu(a_i, b_i] = \infty$.
+	In this case, we have 
+	\begin{align*}
+		\infty = \mu (a, b]
+		= \sum_{i=1}^n \mu(a_i, b_i] = \infty
+	\end{align*}
+
+	(Case 2: $a > 0$) Without loss of generality,
+	we may assume $a_i < a_{i+1}$ for all $i$.
+	Then it is clear that $a_1 = a$, $b_n = b$, and
+	\begin{align*}
+		b_i = a_{i+1}
+		\quad \forall i = 1, \ldots, n-1
+	\end{align*}
+	It follows that 
+	\begin{align*}
+		\sum_{i=1}^n \mu (a_i, b_i]
+		= \sum_{i=1}^n b_i - a_1
+		= b - a 
+		= \mu (a, b]
+	\end{align*}
+
+	Therefore, we conclude that $\mu$ is indeed additive.
+	However, $\mu$ is not $\sigma$-additive.
+	To see this, we note that 
+	\begin{align*}
+		(0, \frac{1}{2}]
+		= \biguplus_{i = 2}^\infty ( \frac{1}{i+1}, \frac{1}{i} ]
+	\end{align*}
+	We have 
+	\begin{align*}
+		\sum_{i=2}^\infty \mu(\frac{1}{i+1}, \frac{1}{i}]
+		= \sum_{i=2}^\infty \brk{ -\frac{1}{i+1} + \frac{1}{i}}
+		= \lim_{n \to \infty} \brk{ \frac{1}{2} - \frac{1}{n+1} }
+		= \frac{1}{2}
+	\end{align*}
+	whereas
+	\begin{align*}
+		\mu (0, \frac{1}{2}] = \infty
+	\end{align*}
+	Therefore, $\mu$ is not $\sigma$-additive.
+\end{example}
+
+%------------------------------
+
+\begin{definition} \label{def:7}
+	Let $\mu$ be a set function
+	defined on $\mathcal{C} \subseteq \mathcal{P}(\Omega)$.
+	Then
+	\begin{enumerate}
+		\item $\mu$ is said to 
+			be \textbf{continuous from below}\index{continuity from below}
+			at set $E \in \mathcal{C}$ if
+			\begin{align*}
+				E_n \in \mathcal{C}, \; E_n \uparrow E
+				\implies
+				\mu(E_n) \uparrow \mu(E)
+			\end{align*}
+		\item $\mu$ is said to 
+			be \textbf{continuous from above}\index{continuity from above}
+			at set $E \in \mathcal{C}$ if
+			\begin{align*}
+				E_n \in \mathcal{C}, \; E_n \downarrow E
+				\quad \text{and} \quad
+				\exists n_0 \in \N^\ast, \;
+				\mu(E_{n_{0}}) < \infty
+				\implies
+				\mu(E_n) \downarrow \mu(E)
+			\end{align*}
+	\end{enumerate}
+\end{definition}
+
+The symbol $E_n \uparrow E$ means that
+\begin{align*}
+	E_n \subseteq E_{n+1} 
+	\quad \forall n \in \N^\ast
+	\quad \text{and} \quad
+	\bigcup_{n = 1}^\infty E_n = E
+\end{align*}
+And by writing $\mu(E_n) \uparrow \mu(E)$,
+we mean that 
+\begin{enumerate}
+	\item $\{\mu(E_n)\}$ is an increasing sequence 
+		(of extended real numbers), and 
+	\item $\lim_{n \to \infty} \mu(E_n) = \mu(E)$.
+\end{enumerate}
+In fact, in the above definition, we only need to assume 
+the limit of $\mu(E_n)$ is $\mu(E)$
+since we have already noticed that 
+\begin{align*}
+	A \subseteq B  \implies \mu(A) \leq \mu(B)
+\end{align*}
+
+Now, we pay attention to the condition in the second statement
+of the above definition, i.e., 
+the definition of the continuity from above.
+Note that comparing to the continuity from below, 
+we impose an additional requirement that $\mu(E_{n_0})$ is finite
+for some index $n_0$.
+The reason why we do this is explained through the following example.
+
+\begin{example} \label{eg:3}
+	Let $\Omega = \R$ and $E_n = [n, \infty)$.
+	We would want the length of $E_n$, $\lambda(E_n)$,
+	to be infinity.
+	Actually, $\lambda$ is a measure, called Lebesgue measure, 
+	on the Borel $\sigma$-algebra of the real line,
+	which is a generalization of the concept of length.
+
+	Note that $E_n \downarrow \emptyset$.
+	We have $\lambda(E_n) = \infty$ whereas $\lambda(\emptyset) = 0$.
+	In this case, $\lambda(E_n)$ does not tend to $\lambda(\emptyset)$
+	as $n \to \infty$.
+	If we do not assume $\lambda(E_n)$ is finite for some $n = n_0$,
+	then we cannot say $\lambda$ is continuous from above at $\emptyset$
+	in this case.
+	However, we really want that the measure to be continuous from above
+	at all sets.
+	Therefore, it is necessary to impose an additional condition
+	as in Definition~\ref{def:7}.
+\end{example}
+
+%------------------------------
+
+\section{Extension of Measures}
+
+%------------------------------
+
+\begin{theorem}[Carathéodory's Extension Theorem] \label{thm:1}
+	% TODO
+\end{theorem}
+
+%==============================
+
+\chapter{Sets and Events}
+
+%------------------------------
+
+\section{Probability Spaces}
+
+
+
+%------------------------------
+
+\section{Distributions}
+
+
+
+%==============================
+
+% references
+\printbibliography[heading=bibintoc, title=References]
+
+%==============================
+
+% print index page
+\printindex
+
+%==============================
+\end{document}
