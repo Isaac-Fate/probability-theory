@@ -171,12 +171,15 @@ Therefore, $\mu$ is not $\sigma$-additive.
 ````{prf:definition}
 :label: def:7
 
+```{index} continuity from below
+```
+
+```{index} continuity from above
+```
+
 Let $\mu$ be a set function
 defined on $\mathcal{C} \subseteq \mathcal{P}(\Omega)$.
-Then
-- ➀ ```{index} continuity from below
-```
-$\mu$ is said to
+Then- ➀ $\mu$ is said to
 be **continuous from below**
 at set $E \in \mathcal{C}$ if
 
@@ -186,9 +189,7 @@ E_n \in\mathcal{C}, \; E_n \uparrow E
 \implies\mu(E_n) \uparrow\mu(E)
 \end{align*}
 ```
-- ➁ ```{index} continuity from above
-```
-$\mu$ is said to
+- ➁ $\mu$ is said to
 be **continuous from above**
 at set $E \in \mathcal{C}$ if
 
