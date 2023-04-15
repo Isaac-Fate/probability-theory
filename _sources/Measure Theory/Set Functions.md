@@ -204,6 +204,17 @@ E_n \in\mathcal{C}, \; E_n \downarrow E
 
 ````
 
+:::{note}
+
+In what follows, by saying $\mu$ is continuous from below (or above)
+without specifying a practical set,
+we mean that $\mu$ is continuous from below (or above) at every set
+in the given class of sets in the context.
+And we say $\mu$ is continuous if it is continuous
+both from below and above.
+
+:::
+
 The symbol $E_n \uparrow E$ means that
 
 ```{math}
@@ -261,3 +272,196 @@ Therefore, it is necessary to impose an additional condition
 as in {prf:ref}`def:7`.
 
 ````
+
+The next lemma shall be useful in many proofs.
+
+
+````{prf:lemma}
+:label: lem:1
+
+Let $\mathcal{A}$ be an algebra on $\Omega$.
+Suppose $\mu$ is an additive set function defined on $\mathcal{A}$.
+Then we have the following:
+- ➀ If $\mu$ is $\sigma$-additive,
+then $\mu$ is continuous.
+- ➁ If $\mu$ is continuous from below,
+then $\mu$ is $\sigma$-additive.
+- ➂ If $\mu$ is continuous from above at $\emptyset$
+and $\mu$ is finite,
+then $\mu$ is $\sigma$-additive.
+
+
+````
+
+Since the proof of each statement is
+quite long, and each deserves some additional comments,
+we shall present the proofs separately.
+
+Proof of 1 of {prf:ref}`lem:1`:
+
+
+````{prf:proof}
+(Continuity from Below)
+Suppose $E_n, E \in \mathcal{A}$ and $E_n \uparrow E$.
+Let
+
+```{math}
+\begin{align*}
+F_n = E_{n}\setminus E_{n-1}\quad\forall n \in\N^\ast\end{align*}
+```
+
+where $E_0 = \emptyset$.
+Note that
+- ➀ $E_n = \biguplus_{i=1}^n F_i$, and
+- ➁ $\biguplus_{n=1}^\infty F_n = \bigcup_{n=1}^\infty E_n = E$.
+
+
+Because $\mu$ is additive, we have
+
+```{math}
+:label: eq:2
+\begin{align}\mu(E_n) = \sum_{i=1}^n \mu(F_i)
+\end{align}
+```
+
+And by further exploiting the fact that $\mu$ is $\sigma$-additive,
+we have
+
+```{math}
+:label: eq:3
+\begin{align}\mu(E) = \mu(\biguplus_{n=1}^\infty F_n)
+= \sum_{n=1}^\infty\mu(F_n)
+\end{align}
+```
+
+Letting $n \to \infty$ on both sides of {eq}`eq:2`,
+we find
+
+```{math}
+\begin{align*}\lim_{n \to \infty}\mu(E_n)
+= \sum_{i=1}^\infty\mu(F_i)
+= \mu(E)
+\end{align*}
+```
+
+where the last equality follows from {eq}`eq:3`.
+Therefore, $\mu$ is continuous from below.
+
+(Continuity from Above)
+To prove the continuity from below,
+we are going to exploit the result that $\mu$
+is continuity from above, which we have just proved.
+Suppose that $E_n, E \in \mathcal{A}$, $E_n \downarrow E$,
+and $\mu(E_N) < \infty$ for some $N \in \N^\ast$.
+
+:::{note}
+
+In order to apply the result that $\mu$
+is continuous from below,
+we need to construct
+a sequence of increasing sets out of $E_n$'s.
+
+:::
+
+Let
+
+```{math}
+\begin{align*}
+F_n = E_N \setminus E_n
+\quad\forall n \in\N^\ast\end{align*}
+```
+
+Note that
+- ➀ $F_n \subseteq F_{n+1}$, and
+- ➁ $\bigcup_{n=1}^\infty F_n = E_N \setminus \bigcap_{n=1}^\infty E_n = E_N \setminus E$.
+
+
+Hence, indeed $F_n \uparrow E_N \setminus E$.
+It then follows that $\mu(F_n) \uparrow \mu(E_N \setminus E)$.
+Since $\mu$ is of course increasing,
+what matters is the following:
+
+```{math}
+:label: eq:4
+\begin{align}\lim_{n \to \infty}\mu(F_n) = \mu(E_N \setminus E)
+\end{align}
+```
+
+Note that we have
+
+```{math}
+\begin{align*}\mu(F_n) + \mu(E_n) &= \mu(E_N) \\\mu(E_N \setminus E) + \mu(E) &= \mu(E_N)
+\end{align*}
+```
+
+Equating the right-hand sides yields
+
+```{math}
+\begin{align*}\mu(F_n) + \mu(E_n)
+= \mu(E_N \setminus E) + \mu(E)
+\end{align*}
+```
+
+Letting $n \to \infty$, we find
+
+```{math}
+\begin{align*}\lim_{n \to \infty}\mu(F_n) + \lim_{n \to \infty}\mu(E_n)
+= \mu(E_N \setminus E) + \mu(E)
+\end{align*}
+```
+
+Plugging in the value of $\lim_{n \to \infty} \mu(F_n)$
+using {eq}`eq:4`, we obtain
+
+```{math}
+:label: eq:5
+\begin{align}\mu(E_N \setminus E) + \lim_{n \to \infty}\mu(E_n)
+= \mu(E_N \setminus E) + \mu(E)
+\end{align}
+```
+
+Because $\mu(E_N \setminus E)$ is finite since $\mu(E_N)$ is,
+we are allowed to cancel this term on both sides of {eq}`eq:5`.
+Therefore,
+
+```{math}
+\begin{align*}\lim_{n \to \infty}\mu(E_n)
+= \mu(E)
+\end{align*}
+```
+
+which shows $\mu$ is indeed continuous from above.
+
+````
+
+Note that in the above proof, we always
+consider the addition of two set functions
+instead of subtraction.
+For example,
+we write
+
+```{math}
+:label: eq:7
+\begin{align}\mu(E_N \setminus E) + \mu(E) = \mu(E_N)
+\end{align}
+```
+
+instead of
+
+```{math}
+:label: eq:6
+\begin{align}\mu(E_N \setminus E) = \mu(E_N) - \mu(E)
+\end{align}
+```
+
+though it is more tempting to write {eq}`eq:6`.
+The reason is that {eq}`eq:6` may not be valid in general
+if $\mu(E) = \infty$
+although {eq}`eq:6` indeed holds in this case
+since $\mu(E)$ has to be finite
+for that the right-hand side of {eq}`eq:7` is finite.
+But if we do not assume $\mu(E_N) < \infty$,
+then chances are that $\mu(E_N) = \mu(E) = \mu(E_N \setminus E) = \infty$.
+
+
+
