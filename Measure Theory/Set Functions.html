@@ -644,8 +644,9 @@ F_n = E_N \setminus E_n
 \quad\forall n \in\N^\ast\end{align*}\]</div>
 <p>Note that</p>
 <ul class="simple">
-<li><p>➀ <span class="math notranslate nohighlight">\(F_n \subseteq F_{n+1}\)</span>, and</p></li>
-<li><p>➁ <span class="math notranslate nohighlight">\(\bigcup_{n=1}^\infty F_n = E_N \setminus \bigcap_{n=1}^\infty E_n = E_N \setminus E\)</span>.</p></li>
+<li><p>➀ <span class="math notranslate nohighlight">\(F_n \in \mathcal{A}\)</span>,</p></li>
+<li><p>➁ <span class="math notranslate nohighlight">\(F_n \subseteq F_{n+1}\)</span>, and</p></li>
+<li><p>➂ <span class="math notranslate nohighlight">\(\bigcup_{n=1}^\infty F_n = E_N \setminus \bigcap_{n=1}^\infty E_n = E_N \setminus E\)</span>.</p></li>
 </ul>
 <p>Hence, indeed <span class="math notranslate nohighlight">\(F_n \uparrow E_N \setminus E\)</span>.
 It then follows that <span class="math notranslate nohighlight">\(\mu(F_n) \uparrow \mu(E_N \setminus E)\)</span>.
@@ -675,8 +676,16 @@ using <a class="reference internal" href="#equation-eq-4">(1.5)</a>, we obtain</
 = \mu(E_N \setminus E) + \mu(E)
 \end{align}\]</div>
 <p>Because <span class="math notranslate nohighlight">\(\mu(E_N \setminus E)\)</span> is finite since <span class="math notranslate nohighlight">\(\mu(E_N)\)</span> is,
-we are allowed to cancel this term on both sides of <a class="reference internal" href="#equation-eq-5">(1.6)</a>.
-Therefore,</p>
+we are allowed to cancel this term on both sides of <a class="reference internal" href="#equation-eq-5">(1.6)</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As we can see, it is necessary to assume <span class="math notranslate nohighlight">\(\mu(E_n)\)</span>
+in the definition of continuity from above
+for we need to subtract a finite number on
+both side of <a class="reference internal" href="#equation-eq-5">(1.6)</a>
+to obtain the desired result.</p>
+</div>
+<p>Therefore,</p>
 <div class="math notranslate nohighlight">
 \[\begin{align*}\lim_{n \to \infty}\mu(E_n)
 = \mu(E)
@@ -688,21 +697,77 @@ consider the addition of two set functions
 instead of subtraction.
 For example,
 we write</p>
-<div class="math notranslate nohighlight" id="equation-eq-7">
-<span class="eqno">(1.7)<a class="headerlink" href="#equation-eq-7" title="Permalink to this equation">#</a></span>\[\begin{align}\mu(E_N \setminus E) + \mu(E) = \mu(E_N)
-\end{align}\]</div>
-<p>instead of</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\mu(E_N \setminus E_n) + \mu(E_n) = \mu(E_N)
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(E_N \setminus E_n = F_n\)</span>, instead of</p>
 <div class="math notranslate nohighlight" id="equation-eq-6">
-<span class="eqno">(1.8)<a class="headerlink" href="#equation-eq-6" title="Permalink to this equation">#</a></span>\[\begin{align}\mu(E_N \setminus E) = \mu(E_N) - \mu(E)
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-eq-6" title="Permalink to this equation">#</a></span>\[\begin{align}\mu(E_N \setminus E_n) = \mu(E_N) - \mu(E_n)
 \end{align}\]</div>
-<p>though it is more tempting to write <a class="reference internal" href="#equation-eq-6">(1.8)</a>.
-The reason is that <a class="reference internal" href="#equation-eq-6">(1.8)</a> may not be valid in general
-if <span class="math notranslate nohighlight">\(\mu(E) = \infty\)</span>
-although <a class="reference internal" href="#equation-eq-6">(1.8)</a> indeed holds in this case
-since <span class="math notranslate nohighlight">\(\mu(E)\)</span> has to be finite
-for that the right-hand side of <a class="reference internal" href="#equation-eq-7">(1.7)</a> is finite.
-But if we do not assume <span class="math notranslate nohighlight">\(\mu(E_N) &lt; \infty\)</span>,
-then chances are that <span class="math notranslate nohighlight">\(\mu(E_N) = \mu(E) = \mu(E_N \setminus E) = \infty\)</span>.</p>
+<p>though it is more tempting to write <a class="reference internal" href="#equation-eq-6">(1.7)</a>.
+The reason is that <a class="reference internal" href="#equation-eq-6">(1.7)</a> may not be valid in general
+for chances are that <span class="math notranslate nohighlight">\(\mu(E_n) = \infty\)</span>.</p>
+<p>Therefore, we must be very careful
+and first ensure that <span class="math notranslate nohighlight">\(\mu(B) &lt; \infty\)</span>
+before writing down</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\mu(A \setminus B) = \mu(A) - \mu(B)
+\end{align*}\]</div>
+<p>Proof of 2 of <a class="reference internal" href="#lem:1">Lemma 1.1</a>:</p>
+<div class="proof admonition" id="proof">
+<p>Proof. It is given that <span class="math notranslate nohighlight">\(\mu\)</span> is additive,
+continuous from below,
+we want to show that it is <span class="math notranslate nohighlight">\(\sigma\)</span>-additive.
+Suppose <span class="math notranslate nohighlight">\(E_n, E \in \mathcal{A}\)</span>
+and <span class="math notranslate nohighlight">\(E = \biguplus_{n=1}^\infty E_n\)</span>.
+Let</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}
+F_n = \biguplus_{i=1}^n E_i
+\end{align*}\]</div>
+<p>It is clear that <span class="math notranslate nohighlight">\(F_n \uparrow E\)</span>.
+Hence, <span class="math notranslate nohighlight">\(\mu(F_n) \uparrow \mu(E)\)</span>
+since <span class="math notranslate nohighlight">\(\mu\)</span> is continuous from below.
+Exploiting the fact that <span class="math notranslate nohighlight">\(\mu\)</span> is additive, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\mu(F_n) = \mu(\biguplus_{i=1}^n E_i)
+= \sum_{i=1}^n \mu(E_i)
+\end{align*}\]</div>
+<p>Therefore,</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\sum_{i=1}^\infty\mu(E_i) = \mu(E)
+\end{align*}\]</div>
+<p>since we have already known the limit of <span class="math notranslate nohighlight">\(\mu(F_n)\)</span> is <span class="math notranslate nohighlight">\(\mu(E)\)</span>.
+This shows that <span class="math notranslate nohighlight">\(\mu\)</span> is indeed <span class="math notranslate nohighlight">\(\sigma\)</span>-additive.</p>
+</div>
+<p>Proof of 3 of <a class="reference internal" href="#lem:1">Lemma 1.1</a>:</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Suppose that <span class="math notranslate nohighlight">\(\mu\)</span> is additive,
+continuous from above at <span class="math notranslate nohighlight">\(\emptyset\)</span>,
+and <span class="math notranslate nohighlight">\(\mu\)</span> is finite.
+We want to show <span class="math notranslate nohighlight">\(\mu\)</span> is <span class="math notranslate nohighlight">\(\sigma\)</span>-additive.
+Suppose <span class="math notranslate nohighlight">\(E_n, E \in \mathcal{A}\)</span>
+and <span class="math notranslate nohighlight">\(E = \biguplus_{n=1}^\infty E_n\)</span>.
+Construct a sequence of sets <span class="math notranslate nohighlight">\(F_n\)</span> as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}
+F_n = E \setminus\biguplus_{i=1}^{n-1} E_i
+\end{align*}\]</div>
+<p>Because <span class="math notranslate nohighlight">\(F_n \downarrow \emptyset\)</span>
+and <span class="math notranslate nohighlight">\(\mu(F_1) &lt; \infty\)</span>(actually <span class="math notranslate nohighlight">\(\mu(F_n) &lt; \infty\)</span> for all <span class="math notranslate nohighlight">\(n\)</span>),
+we have <span class="math notranslate nohighlight">\(\mu(F_n) \downarrow 0\)</span>
+by the definition of continuity from above.
+Since <span class="math notranslate nohighlight">\(\mu\)</span> is finite and additive, we can write</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\mu(F_n) = \mu(E) - \mu(\biguplus_{i=1}^{n-1} E_i)
+= \mu(E) - \sum_{i=1}^{n-1}\mu(E_i)
+\end{align*}\]</div>
+<p>Therefore, letting <span class="math notranslate nohighlight">\(n \to \infty\)</span> yields</p>
+<div class="math notranslate nohighlight">
+\[\begin{align*}\sum_{i=1}^\infty\mu(E_i) = \mu(E)
+\end{align*}\]</div>
+<p>This implies <span class="math notranslate nohighlight">\(\mu\)</span> is <span class="math notranslate nohighlight">\(\sigma\)</span>-additive.</p>
+</div>
 </section>
 
     <script type="text/x-thebe-config">

@@ -372,8 +372,9 @@ F_n = E_N \setminus E_n
 ```
 
 Note that
-- ➀ $F_n \subseteq F_{n+1}$, and
-- ➁ $\bigcup_{n=1}^\infty F_n = E_N \setminus \bigcap_{n=1}^\infty E_n = E_N \setminus E$.
+- ➀ $F_n \in \mathcal{A}$,
+- ➁ $F_n \subseteq F_{n+1}$, and
+- ➂ $\bigcup_{n=1}^\infty F_n = E_N \setminus \bigcap_{n=1}^\infty E_n = E_N \setminus E$.
 
 
 Hence, indeed $F_n \uparrow E_N \setminus E$.
@@ -422,6 +423,17 @@ using {eq}`eq:4`, we obtain
 
 Because $\mu(E_N \setminus E)$ is finite since $\mu(E_N)$ is,
 we are allowed to cancel this term on both sides of {eq}`eq:5`.
+
+:::{note}
+
+As we can see, it is necessary to assume $\mu(E_n)$
+in the definition of continuity from above
+for we need to subtract a finite number on
+both side of {eq}`eq:5`
+to obtain the desired result.
+
+:::
+
 Therefore,
 
 ```{math}
@@ -441,27 +453,110 @@ For example,
 we write
 
 ```{math}
-:label: eq:7
-\begin{align}\mu(E_N \setminus E) + \mu(E) = \mu(E_N)
-\end{align}
+\begin{align*}\mu(E_N \setminus E_n) + \mu(E_n) = \mu(E_N)
+\end{align*}
 ```
 
-instead of
+where $E_N \setminus E_n = F_n$, instead of
 
 ```{math}
 :label: eq:6
-\begin{align}\mu(E_N \setminus E) = \mu(E_N) - \mu(E)
+\begin{align}\mu(E_N \setminus E_n) = \mu(E_N) - \mu(E_n)
 \end{align}
 ```
 
 though it is more tempting to write {eq}`eq:6`.
 The reason is that {eq}`eq:6` may not be valid in general
-if $\mu(E) = \infty$
-although {eq}`eq:6` indeed holds in this case
-since $\mu(E)$ has to be finite
-for that the right-hand side of {eq}`eq:7` is finite.
-But if we do not assume $\mu(E_N) < \infty$,
-then chances are that $\mu(E_N) = \mu(E) = \mu(E_N \setminus E) = \infty$.
+for chances are that $\mu(E_n) = \infty$.
+
+Therefore, we must be very careful
+and first ensure that $\mu(B) < \infty$
+before writing down
+
+```{math}
+\begin{align*}\mu(A \setminus B) = \mu(A) - \mu(B)
+\end{align*}
+```
+
+Proof of 2 of {prf:ref}`lem:1`:
 
 
+````{prf:proof}
 
+It is given that $\mu$ is additive,
+continuous from below,
+we want to show that it is $\sigma$-additive.
+Suppose $E_n, E \in \mathcal{A}$
+and $E = \biguplus_{n=1}^\infty E_n$.
+Let
+
+```{math}
+\begin{align*}
+F_n = \biguplus_{i=1}^n E_i
+\end{align*}
+```
+
+It is clear that $F_n \uparrow E$.
+Hence, $\mu(F_n) \uparrow \mu(E)$
+since $\mu$ is continuous from below.
+Exploiting the fact that $\mu$ is additive, we have
+
+```{math}
+\begin{align*}\mu(F_n) = \mu(\biguplus_{i=1}^n E_i)
+= \sum_{i=1}^n \mu(E_i)
+\end{align*}
+```
+
+Therefore,
+
+```{math}
+\begin{align*}\sum_{i=1}^\infty\mu(E_i) = \mu(E)
+\end{align*}
+```
+
+since we have already known the limit of $\mu(F_n)$ is $\mu(E)$.
+This shows that $\mu$ is indeed $\sigma$-additive.
+
+````
+
+Proof of 3 of {prf:ref}`lem:1`:
+
+
+````{prf:proof}
+
+Suppose that $\mu$ is additive,
+continuous from above at $\emptyset$,
+and $\mu$ is finite.
+We want to show $\mu$ is $\sigma$-additive.
+Suppose $E_n, E \in \mathcal{A}$
+and $E = \biguplus_{n=1}^\infty E_n$.
+Construct a sequence of sets $F_n$ as follows:
+
+```{math}
+\begin{align*}
+F_n = E \setminus\biguplus_{i=1}^{n-1} E_i
+\end{align*}
+```
+
+Because $F_n \downarrow \emptyset$
+and $\mu(F_1) < \infty$(actually $\mu(F_n) < \infty$ for all $n$),
+we have $\mu(F_n) \downarrow 0$
+by the definition of continuity from above.
+Since $\mu$ is finite and additive, we can write
+
+```{math}
+\begin{align*}\mu(F_n) = \mu(E) - \mu(\biguplus_{i=1}^{n-1} E_i)
+= \mu(E) - \sum_{i=1}^{n-1}\mu(E_i)
+\end{align*}
+```
+
+Therefore, letting $n \to \infty$ yields
+
+```{math}
+\begin{align*}\sum_{i=1}^\infty\mu(E_i) = \mu(E)
+\end{align*}
+```
+
+This implies $\mu$ is $\sigma$-additive.
+
+````
