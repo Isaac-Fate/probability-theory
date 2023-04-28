@@ -15,7 +15,7 @@ if it satisfies the following properties:
 written as a finite disjoint union
 of sets in $\mathcal{S}$.
 Formally, $\forall A \in \mathcal{S}, \; \exists E_1, \ldots, E_n \in \mathcal{S}$
-such that $A^\complement = \biguplus_{i=1}^n E_i$
+such that $A^\complement = \biguplus_{i=1}^n E_i$.
 
 
 ````
